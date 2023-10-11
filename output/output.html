@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strawberry growth stage identification</title>
+    <link rel="stylesheet" href="output.css">
+    <script defer src="output.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>いちごの成長段階解析結果</h1>
+
+        <div class="input-section">
+            <label class="upload-label">
+                <img id="resultImage" src="#" alt="分析結果の画像" style="max-width: 100%;">
+            </label>
+        </div>
+
+        <div class="info">
+            <p>判別されたいちごの総数: <span id="totalStrawberries"></span></p>
+            <p>flowering: <span id="floweringCount"></span></p>
+            <p>growing_g: <span id="growingGCount"></span></p>
+            <p>growing_w: <span id="growingWCount"></span></p>
+            <p>nearly_m: <span id="nearlyMCount"></span></p>
+            <p>mature: <span id="matureCount"></span></p>
+            <h2>今後の成熟時期スケジュール</h2>
+            <div id="schedule"></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeOverlay()">
+        <img src="" id="enlargedImage">
+    </div>
+</body>
+
+</html>
