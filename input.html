@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strawberry growth stage identification</title>
+    <link rel="stylesheet" href="input.css">
+    <script defer src="./input.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>いちごの写真を<br>アップロードしてください</h1>
+
+        <div class="input-section">
+            <label for="strawberryImage" class="upload-label">
+                <span id="uploadPrompt">ここをクリックして画像をアップロード</span>
+            </label>
+            <input type="file" id="strawberryImage" accept="image/*" onchange="previewImage()" hidden>
+        </div>
+
+        <div class="button-section">
+            <button id="cancelBtn">キャンセル</button>
+            <button id="submitBtn">解析する</button>
+        </div>
+
+        <div class="growth-stage-info">
+            <h2>いちごの成長段階</h2>
+            <img src="./growth_stage.png" alt="いちごの成長段階の説明画像" id="growthStageImage">
+        </div>
+    </div>
+</body>
+
+</html>
