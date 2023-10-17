@@ -18,7 +18,6 @@ function displayAnalysisResults() {
     document.getElementById('nearlyMCount').textContent = analysisResult.nearly_m;
     document.getElementById('matureCount').textContent = analysisResult.mature;
     document.getElementById('schedule').textContent = analysisResult.schedule;
-    document.getElementById('resultImage').src = "./result_sample.png";
 }
 
 document.addEventListener('DOMContentLoaded', displayAnalysisResults);

@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strawberry growth stage identification</title>
-    <link rel="stylesheet" href="output.css">
-    <script defer src="output.js"></script>
+
+    <!-- cssファイルの読み込み -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+
+    <!-- jsファイルの読み込み -->
+    <script defer src="{{ url_for('static', filename='js/result.js') }}"></script>
 </head>
 
 <body>
@@ -15,7 +19,7 @@
 
         <div class="input-section">
             <label class="upload-label">
-                <img id="resultImage" src="#" alt="分析結果の画像" style="max-width: 100%;">
+                <img id="resultImage" src="{{ url_for('static', filename='images/result_sample.png') }}" alt="分析結果の画像" style="max-width: 100%;">
             </label>
         </div>
 
