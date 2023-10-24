@@ -48,17 +48,29 @@ def count_classes(results):
     # 各クラスの個数をカウント
     r = results[0]  # 1枚の画像の推論結果を取得
     det = r.boxes  # boxes属性からバウンディングボックスを取得
-    class_counts = {}  # クラスの個数を保持する辞書
+
+    # すべてのクラスをキーとして持つ辞書を初期化
+    all_classes = {
+        "flowering": 0,
+        "growing_g": 0,
+        "growing_w": 0,
+        "nearly_m": 0,
+        "mature": 0
+    }
+
     for c in det.cls.unique():  # ユニークなクラスIDをループ
-        n = (det.cls == c).sum()  # 各クラスの検出をカウント
+        n = (det.cls == c).sum().item()  # 各クラスの検出をカウントし、Tensorをintに変換
         class_name = r.names[int(c)]  # クラス名を取得
-        class_counts[class_name] = n  # クラスの個数を辞書に保存
+        all_classes[class_name] = n  # クラスの個数を辞書に保存
+
+    # すべてのクラスの数を合計
+    all_classes["all"] = sum(all_classes.values())
 
     # 各クラスの個数をJSONファイルとして保存
     result_json_filename = f'result_{target_filename}.json'  # 保存するJSONファイル名を設定
     file_path = os.path.join(app.root_path, 'static/predict/classes', result_json_filename)
     with open(file_path, 'w') as json_file:
-        json.dump(class_counts, json_file, ensure_ascii=False, indent=4)  # JSONファイルとして保存
+        json.dump(all_classes, json_file, ensure_ascii=False, indent=4)  # JSONファイルとして保存
 
 
 
@@ -72,8 +84,15 @@ def index():
 # 解析結果の表示画面
 @app.route('/result')
 def result():
-    file_url = url_for('static', filename=f'predict/images/result_{target_filename}.png')
-    return render_template('result.html', file_url=file_url)
+    # htmlに渡すデータ(img)を用意
+    result_img = url_for('static', filename=f'predict/images/result_{target_filename}.png')
+
+    # htmlに渡すデータ(json)を用意
+    result_json_path = os.path.join(app.root_path, 'static/predict/classes', f'result_{target_filename}.json') # 解析結果（json）のパスを指定
+    with open(result_json_path, 'r') as file:
+        result_json = json.load(file) # JSONファイルの読み込み
+
+    return render_template('result.html', result_img=result_img, result_json=result_json)
 
 
 
@@ -94,7 +113,7 @@ def predict():
     file_path = os.path.join(app.root_path, 'static/uploads', target_filename_with_extention)
     results = model(file_path) # 推論の実行
     save_image(results) # 推論結果画像を保存
-    # count_classes(results) # 各クラスのカウントを保存
+    count_classes(results) # 各クラスのカウントを保存
     return redirect(url_for('result'))
 
 

@@ -19,19 +19,23 @@
 
         <div class="input-section">
             <label class="upload-label">
-                <img id="resultImage" src="{{ file_url }}" alt="解析結果の画像" style="max-width: 100%;">
+                <img id="resultImage" src="{{ result_img }}" alt="解析結果の画像" style="max-width: 100%;">
             </label>
         </div>
 
         <div class="info">
-            <p>判別されたいちごの総数: <span id="totalStrawberries"></span></p>
-            <p>flowering: <span id="floweringCount"></span></p>
-            <p>growing_g: <span id="growingGCount"></span></p>
-            <p>growing_w: <span id="growingWCount"></span></p>
-            <p>nearly_m: <span id="nearlyMCount"></span></p>
-            <p>mature: <span id="matureCount"></span></p>
+            <p>判別されたいちごの総数: {{ result_json.all }}</p>
+            <p>flowering: {{ result_json.flowering }}</p>
+            <p>growing_g: {{ result_json.growing_g }}</p>
+            <p>growing_w: {{ result_json.growing_w }}</p>
+            <p>nearly_m: {{ result_json.nearly_m }}</p>
+            <p>mature: {{ result_json.mature }}</p>
             <h2>今後の成熟時期スケジュール</h2>
             <div id="schedule"></div>
+        </div>
+
+        <div class="button-section">
+            <button onclick="window.location.href='/'">最初に戻る</button>
         </div>
     </div>
 
