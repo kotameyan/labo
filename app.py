@@ -39,7 +39,7 @@ def save_image(results):
     im = Image.fromarray(im_array[..., ::-1])  # BGRからRGBに変換
 
     # 推論結果の画像を保存
-    result_image_filename = f'result_{target_filename}.png'  # 保存する画像ファイル名を設定
+    result_image_filename = f'result_images_{target_filename}.png'  # 保存する画像ファイル名を設定
     file_path = os.path.join(app.root_path, 'static/predict/images', result_image_filename)
     im.save(file_path)  # 画像を保存
 
@@ -67,10 +67,50 @@ def count_classes(results):
     all_classes["all"] = sum(all_classes.values())
 
     # 各クラスの個数をJSONファイルとして保存
-    result_json_filename = f'result_{target_filename}.json'  # 保存するJSONファイル名を設定
+    result_json_filename = f'result_classes_{target_filename}.json'  # 保存するJSONファイル名を設定
     file_path = os.path.join(app.root_path, 'static/predict/classes', result_json_filename)
     with open(file_path, 'w') as json_file:
         json.dump(all_classes, json_file, ensure_ascii=False, indent=4)  # JSONファイルとして保存
+
+# （推論結果から）収穫時期の予測
+def predict_harvest(result_classes_path):
+    # JSONファイルを読み込み、Pythonの辞書として取得
+    with open(result_classes_path, 'r') as file:
+        data = json.load(file)
+
+    # 現在の日付を取得
+    today = datetime.date.today()
+
+    # 各成長段階から成熟するまでの日数
+    days_to_mature = {
+        "flowering": 40,
+        "growing_g": 20,
+        "growing_w": 10,
+        "nearly_m": 5,
+        "mature": 0
+    }
+
+    # 成熟する日付を予測
+    harvest_dates = {}
+    for stage, days in days_to_mature.items():
+        harvest_date = today + datetime.timedelta(days=days)
+        if data[stage] > 0:
+            if harvest_date in harvest_dates:
+                harvest_dates[harvest_date] += data[stage]
+            else:
+                harvest_dates[harvest_date] = data[stage]
+
+    # 日付の小さい方から順にソート
+    sorted_harvest_dates = dict(sorted(harvest_dates.items()))
+
+    # JSON形式で出力
+    output = {date.strftime('%m/%d'): count for date, count in sorted_harvest_dates.items()}
+
+    # JSONファイルとして保存
+    result_json_filename = f'result_harvests_{target_filename}.json'
+    file_path = os.path.join(app.root_path, 'static/predict/harvests', result_json_filename)
+    with open(file_path, 'w') as json_file:
+        json.dump(output, json_file, ensure_ascii=False, indent=4)
 
 
 
@@ -84,15 +124,20 @@ def index():
 # 解析結果の表示画面
 @app.route('/result')
 def result():
-    # htmlに渡すデータ(img)を用意
-    result_img = url_for('static', filename=f'predict/images/result_{target_filename}.png')
+    # htmlに渡すデータ（images）を用意
+    result_images = url_for('static', filename=f'predict/images/result_images_{target_filename}.png')
 
-    # htmlに渡すデータ(json)を用意
-    result_json_path = os.path.join(app.root_path, 'static/predict/classes', f'result_{target_filename}.json') # 解析結果（json）のパスを指定
-    with open(result_json_path, 'r') as file:
-        result_json = json.load(file) # JSONファイルの読み込み
+    # htmlに渡すデータ(classes)を用意
+    result_classes_path = os.path.join(app.root_path, 'static/predict/classes', f'result_classes_{target_filename}.json') # classesのパスを指定
+    with open(result_classes_path, 'r') as file:
+        result_classes = json.load(file) # JSONファイルの読み込み
 
-    return render_template('result.html', result_img=result_img, result_json=result_json)
+    # htmlに渡すデータ(harvests)を用意
+    result_harvests_path = os.path.join(app.root_path, 'static/predict/harvests', f'result_harvests_{target_filename}.json') # harvestsのパスを指定
+    with open(result_harvests_path, 'r') as file:
+        result_harvests = json.load(file) # JSONファイルの読み込み
+
+    return render_template('result.html', result_images=result_images, result_classes=result_classes, result_harvests=result_harvests)
 
 
 
@@ -110,10 +155,17 @@ def upload():
 @app.route('/predict')
 def predict():
     model = YOLO('models/best.pt') # 推論するmodelの読み込み
+
     file_path = os.path.join(app.root_path, 'static/uploads', target_filename_with_extention)
     results = model(file_path) # 推論の実行
+
     save_image(results) # 推論結果画像を保存
+
     count_classes(results) # 各クラスのカウントを保存
+
+    result_classes_path = os.path.join(app.root_path, 'static/predict/classes', f'result_classes_{target_filename}.json') # classesのパスを指定
+    predict_harvest(result_classes_path) # 収穫時期の予測を保存
+
     return redirect(url_for('result'))
 
 
