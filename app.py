@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 from ultralytics import YOLO
 from PIL import Image
 import os, datetime, random, json
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib
 
 app = Flask(__name__)
 
@@ -68,7 +72,7 @@ def count_classes(results):
 
     # 各クラスの個数をJSONファイルとして保存
     result_json_filename = f'result_classes_{target_filename}.json'  # 保存するJSONファイル名を設定
-    file_path = os.path.join(app.root_path, 'static/predict/classes', result_json_filename)
+    file_path = os.path.join(app.root_path, 'static/predict/classes/json', result_json_filename)
     with open(file_path, 'w') as json_file:
         json.dump(all_classes, json_file, ensure_ascii=False, indent=4)  # JSONファイルとして保存
 
@@ -108,9 +112,67 @@ def predict_harvest(result_classes_path):
 
     # JSONファイルとして保存
     result_json_filename = f'result_harvests_{target_filename}.json'
-    file_path = os.path.join(app.root_path, 'static/predict/harvests', result_json_filename)
+    file_path = os.path.join(app.root_path, 'static/predict/harvests/json', result_json_filename)
     with open(file_path, 'w') as json_file:
         json.dump(output, json_file, ensure_ascii=False, indent=4)
+
+# classesから成長段階のグラフを作成
+def create_classes_graph():
+    # JSONファイルへのパスを指定
+    json_file_path = os.path.join(app.root_path, 'static/predict/classes/json', f'result_classes_{target_filename}.json')
+
+    # JSONファイルを読み込む
+    with open(json_file_path, 'r') as json_file:
+        data_json = json.load(json_file)
+
+    # JSONデータをデータフレームに変換
+    df = pd.DataFrame(list(data_json.items()), columns=['成長段階', '検出個数'])
+
+    # 各棒グラフの色を指定
+    colors = ['white', 'yellowgreen', 'green', 'pink', 'red', 'gray']
+    edge_colors = ['black'] * len(colors)  # 全ての棒グラフに黒いエッジカラーを追加
+
+    # 棒グラフの描画
+    sns.barplot(x='成長段階', y='検出個数', data=df, palette=colors, edgecolor=edge_colors)
+
+    # グラフを画像として保存
+    plt.savefig(f'static/predict/classes/graph/result_classes_{target_filename}.png')
+
+    # グラフを閉じる
+    plt.close()
+
+# harvestsから収穫時期のグラフを作成
+def create_harvests_graph():
+    # JSONファイルへのパスを指定
+    json_file_path = os.path.join(app.root_path, 'static/predict/harvests/json', f'result_harvests_{target_filename}.json')
+
+    # JSONファイルを読み込む
+    with open(json_file_path, 'r') as json_file:
+        data = json.load(json_file)
+
+    # 日付と予測収穫個数をリストに分割
+    dates = list(data.keys())
+    harvest_counts = list(data.values())
+
+    # 折れ線グラフを作成
+    plt.figure(figsize=(10, 6))
+    plt.plot(dates, harvest_counts, marker='o', linestyle='-', color='b', markersize=8)
+
+    # 軸ラベル
+    plt.xlabel("日付", fontsize=14)
+    plt.ylabel("予測収穫個数", fontsize=14)
+
+    # 日付をX軸に表示
+    plt.xticks(rotation=45)
+
+    # グリッド線を追加（オプション）
+    plt.grid(True, linestyle='--', alpha=0.6)
+
+    # グラフを画像として保存
+    plt.savefig(f'static/predict/harvests/graph/result_harvests_{target_filename}.png')
+
+    # グラフを閉じる
+    plt.close()
 
 
 
@@ -128,14 +190,13 @@ def result():
     result_images = url_for('static', filename=f'predict/images/result_images_{target_filename}.png')
 
     # htmlに渡すデータ(classes)を用意
-    result_classes_path = os.path.join(app.root_path, 'static/predict/classes', f'result_classes_{target_filename}.json') # classesのパスを指定
-    with open(result_classes_path, 'r') as file:
-        result_classes = json.load(file) # JSONファイルの読み込み
+    result_classes = url_for('static', filename=f'predict/classes/graph/result_classes_{target_filename}.png')
 
     # htmlに渡すデータ(harvests)を用意
-    result_harvests_path = os.path.join(app.root_path, 'static/predict/harvests', f'result_harvests_{target_filename}.json') # harvestsのパスを指定
-    with open(result_harvests_path, 'r') as file:
-        result_harvests = json.load(file) # JSONファイルの読み込み
+    # result_harvests_path = os.path.join(app.root_path, 'static/predict/harvests/json', f'result_harvests_{target_filename}.json') # harvestsのパスを指定
+    # with open(result_harvests_path, 'r') as file:
+    #     result_harvests = json.load(file) # JSONファイルの読み込み
+    result_harvests = url_for('static', filename=f'predict/harvests/graph/result_harvests_{target_filename}.png')
 
     return render_template('result.html', result_images=result_images, result_classes=result_classes, result_harvests=result_harvests)
 
@@ -161,10 +222,12 @@ def predict():
 
     save_image(results) # 推論結果画像を保存
 
-    count_classes(results) # 各クラスのカウントを保存
+    count_classes(results) # 各クラスのカウントのJSONを作成
+    create_classes_graph() # 各クラスのカウントのグラフを作成
 
-    result_classes_path = os.path.join(app.root_path, 'static/predict/classes', f'result_classes_{target_filename}.json') # classesのパスを指定
-    predict_harvest(result_classes_path) # 収穫時期の予測を保存
+    result_classes_path = os.path.join(app.root_path, 'static/predict/classes/json', f'result_classes_{target_filename}.json') # classesのJSONファイルのパスを指定
+    predict_harvest(result_classes_path) # 収穫時期の予測のJSONを作成
+    create_harvests_graph() # 収穫時期の予測のグラフを作成
 
     return redirect(url_for('result'))
 

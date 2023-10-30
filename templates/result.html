@@ -1,52 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strawberry growth stage identification</title>
+{% set css_file = 'css/result.css' %}
+{% set js_file = 'js/result.js' %}
+{% set page_title = 'いちごの実の<br>成長段階解析結果' %}
 
-    <!-- cssファイルの読み込み -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
-
-    <!-- jsファイルの読み込み -->
-    <script defer src="{{ url_for('static', filename='js/result.js') }}"></script>
-</head>
-
-<body>
-    <div class="container">
-        <h1>いちごの実の成長段階解析結果</h1>
-
-        <div class="input-section">
-            <label class="upload-label">
-                <img id="resultImage" src="{{ result_images }}" alt="解析結果の画像" style="max-width: 100%;">
-            </label>
-        </div>
-
-        <div class="info">
-            <h2>成長段階ごとの集計</h2>
-            <p>判別されたいちごの実の総数: {{ result_classes.all }}</p>
-            <p>flowering: {{ result_classes.flowering }}</p>
-            <p>growing_g: {{ result_classes.growing_g }}</p>
-            <p>growing_w: {{ result_classes.growing_w }}</p>
-            <p>nearly_m: {{ result_classes.nearly_m }}</p>
-            <p>mature: {{ result_classes.mature }}</p>
-            <h2>今後の成熟時期スケジュール</h2>
-            <ul id="harvestDates">
-                {% for date, count in result_harvests.items() %}
-                    <li>{{ date }}: {{ count }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="button-section">
-            <button onclick="window.location.href='/'">最初に戻る</button>
-        </div>
+{% block content %}
+    <div class="input-section">
+        <label class="upload-label">
+            <img id="result_images" src="{{ result_images }}" alt="解析結果の画像">
+        </label>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeOverlay()">
-        <img src="" id="enlargedImage">
+    <div class="info">
+        <h2>成長段階ごとの集計</h2>
+        <img id="result_classes" src="{{ result_classes }}" alt="成長段階のグラフ">
+        <h2>今後の成熟時期スケジュール</h2>
+        <img id="result_harvests" src="{{ result_harvests }}" alt="収穫時期のグラフ">
     </div>
-</body>
 
-</html>
+    <div class="button-section">
+        <button onclick="window.location.href='/'">最初に戻る</button>
+    </div>
+{% endblock %}

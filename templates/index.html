@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strawberry growth stage identification</title>
+{% set css_file = 'css/index.css' %}
+{% set js_file = 'js/index.js' %}
+{% set page_title = 'いちごの写真を<br>アップロードしてください' %}
 
-    <!-- cssファイルの読み込み -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% block content %}
+    <form enctype="multipart/form-data" action="{{ url_for('upload') }}" method="post" id="upload-form">
 
-    <!-- jsファイルの読み込み -->
-    <script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
-</head>
-
-<body>
-    <div class="container">
-        <h1>いちごの写真を<br>アップロードしてください</h1>
-
-        <form enctype="multipart/form-data" action="{{ url_for('upload') }}" method="post" id="upload-form">
-
-            <div class="input-section">
-                <label for="strawberryImage" class="upload-label">
-                    <span id="uploadPrompt">ここをクリックして画像をアップロード</span>
-                </label>
-                <input type="file" name="file" id="strawberryImage" accept="image/*" onchange="previewImage()" hidden>
-            </div>
-
-            <div class="button-section">
-                <button type="button" id="cancelBtn">キャンセル</button>
-                <button type="submit" id="submitBtn">解析する</button>
-            </div>
-
-        </form>
-
-        <div class="growth-stage-info">
-            <h2>いちごの成長段階</h2>
-            <img src="{{ url_for('static', filename='images/growth_stage.png') }}" alt="いちごの成長段階の説明画像" id="growthStageImage">
+        <div class="input-section">
+            <label for="strawberryImage" class="upload-label">
+                <span id="uploadPrompt">ここをクリックして画像をアップロード</span>
+            </label>
+            <input type="file" name="file" id="strawberryImage" accept="image/*">
         </div>
-    </div>
-</body>
 
-</html>
+        <div class="button-section">
+            <button type="button" id="cancelBtn">キャンセル</button>
+            <button type="submit" id="submitBtn">解析する</button>
+        </div>
+
+    </form>
+
+    <div class="growth-stage-info">
+        <h2>いちごの成長段階</h2>
+        <img src="{{ url_for('static', filename='images/growth_stage_info.png') }}" alt="いちごの成長段階の説明画像" id="growthStageImage">
+    </div>
+{% endblock %}

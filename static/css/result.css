@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Noto Sans JP', sans-serif;
     background: linear-gradient(to bottom, #f6f8fa, #e9ecf1);
     padding: 20px;
@@ -122,10 +122,10 @@ button:hover {
     #growthStageImage {
         width: 100%;
     }
-}
+} */
 
 /* 画像拡大表示のオーバーレイ */
-.overlay {
+/* .overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -143,4 +143,4 @@ button:hover {
     max-height: 80%;
     border: 3px solid white;
     border-radius: 10px;
-}
+} */

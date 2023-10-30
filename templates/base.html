@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strawberry growth stage identification</title>
+
+    <!-- Common CSS for all pages -->
+    {% set css_file = 'css/base.css' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename=css_file) }}">
+
+    <!-- Common JS for all pages -->
+    {% set js_file = 'js/base.js' %}
+    <script defer src="{{ url_for('static', filename=js_file) }}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ page_title|safe }}</h1>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

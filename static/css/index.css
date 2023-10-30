@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Noto Sans JP', sans-serif;
     background: linear-gradient(to bottom, #f6f8fa, #e9ecf1);
     padding: 20px;
@@ -119,10 +119,10 @@ button:hover {
 
 .button-section button:last-child {
     margin-right: 0;
-}
+} */
 
 /* ビューポートの幅が480px以下のデバイス向けのスタイル */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     body {
         padding: 5px;
     }
@@ -170,4 +170,51 @@ button:hover {
     #growthStageImage {
         width: 100%;
     }
+}  */
+
+/* input-section スタイル */
+.input-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d1e8d7; /* 淡い緑色 */
+    border: 2px dashed #4a5a42; /* 破線のボーダー */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-label:hover {
+    background-color: #b8d5c5; /* ホバー時は色を少し濃く */
+}
+
+#uploadPrompt {
+    font-size: 16px;
+}
+
+/* button-section スタイル */
+.button-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-section button {
+    margin: 0 10px;
+}
+
+/* growth-stage-info スタイル */
+.growth-stage-info {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#growthStageImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
