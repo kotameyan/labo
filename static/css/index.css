@@ -1,220 +1,58 @@
-/* body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: linear-gradient(to bottom, #f6f8fa, #e9ecf1);
-    padding: 20px;
+/* 「イチゴの画像をアップロードして下さい」の案内文の制御 */
+@media (max-width: 768px) {
+    #upload-prompt .part-1::after {
+        content: "\A";
+        white-space: pre;
+    }
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+.fs-1-responsive {
+    font-size: 2.5rem;
 }
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.input-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.upload-label {
-    display: block;
-    width: 100%;
-    height: 30vh;
-    border: 1px dashed #ccc;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin-bottom: 20px;
-    line-height: 300px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    background-color: #f6f8fa;
-}
-
-#uploadPrompt {
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    pointer-events: none;
-}
-
-.image-preview {
-    width: 100%;
-    height: 300px;
-    border: 1px dashed #ccc;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin-bottom: 20px;
-}
-
-button {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transform: translateY(0);
-}
-
-button:hover {
-    background-color: #c0392b;
-    transform: translateY(-2px);
-}
-
-.growth-stage-info {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.growth-stage-info h2 {
-    margin-bottom: 15px;
-}
-
-#growthStageImage {
-    max-width: 100%;
+.img-lg {
+    width: 40px;
     height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
-.button-section {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-#cancelBtn {
-    background-color: #95a5a6;
-    color: #fff;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transform: translateY(0);
-}
-
-#cancelBtn:hover {
-    background-color: #7f8c8d;
-    transform: translateY(-2px);
-}
-
-.button-section button {
-    margin-right: 10px;
-}
-
-.button-section button:last-child {
-    margin-right: 0;
-} */
-
-/* ビューポートの幅が480px以下のデバイス向けのスタイル */
-/* @media (max-width: 480px) {
-    body {
-        padding: 5px;
+@media (max-width: 1280px) {
+    .fs-1-responsive {
+        font-size: 1.75rem;
     }
-
-    .container {
-        padding: 10px;
+    .img-lg {
+        width: 30px;
     }
-
-    h1 {
-        font-size: 24px;
-        margin-bottom: 15px;
-        line-height: 1.2;
-    }
-
-    .upload-label {
-        min-height: 200px;
-        line-height: 200px;
-    }
-
-    #uploadPrompt {
-        font-size: 14px;
-    }
-
-    .button-section {
-        justify-content: space-between;
-    }
-
-    button {
-        flex: 1;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    #cancelBtn {
-        flex: 1;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .growth-stage-info h2 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    #growthStageImage {
-        width: 100%;
-    }
-}  */
-
-/* input-section スタイル */
-.input-section {
-    margin-bottom: 20px;
-    text-align: center;
 }
 
-.upload-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #d1e8d7; /* 淡い緑色 */
-    border: 2px dashed #4a5a42; /* 破線のボーダー */
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+@media (max-width: 768px) {
+    .fs-1-responsive {
+        font-size: 1.25rem;
+    }
+    .img-lg {
+        width: 20px;
+    }
 }
 
-.upload-label:hover {
-    background-color: #b8d5c5; /* ホバー時は色を少し濃く */
+
+
+/* アップロードボックスのデザイン */
+#upload-box {
+    background-color: whitesmoke;
+    height: 35vh;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    border: 3px dashed #000;
 }
 
-#uploadPrompt {
-    font-size: 16px;
+
+
+/* アップロードした画像のプレビュー機能 */
+#upload-image {
+    display: none;
 }
 
-/* button-section スタイル */
-.button-section {
-    margin-top: 20px;
-    text-align: center;
-}
+#uploaded-image {
+    display: none;
 
-.button-section button {
-    margin: 0 10px;
-}
-
-/* growth-stage-info スタイル */
-.growth-stage-info {
-    margin-top: 40px;
-    text-align: center;
-}
-
-#growthStageImage {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 95%;
+    max-height: 95%;
 }
