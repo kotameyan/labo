@@ -42,10 +42,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">使用方法</a>
+                            <a class="nav-link" href="#" data-bs-toggle="modal"
+                                data-bs-target="#aboutModal">このアプリについて</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">成長段階ガイド</a>
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#guideModal">成長段階ガイド</a>
                         </li>
                     </ul>
                 </div>
@@ -57,6 +58,95 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- このアプリについてのモーダル -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aboutModalLabel">このアプリについて</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="p-2 bg-primary-subtle rounded-3">アプリの概要</h5>
+                    <p class="font-monospace">このアプリは、いちごの成長段階をAIモデルによって判定するWEBアプリケーションです。</p>
+
+                    <h5 class="p-2 bg-primary-subtle rounded-3">主な機能</h5>
+                    <ul>
+                        <li>画像アップロードによるイチゴの成長段階の検出</li>
+                        <li>収穫時期の予測グラフの表示</li>
+                    </ul>
+
+                    <h5 class="p-2 bg-primary-subtle rounded-3">使用方法</h5>
+                    <p>イチゴの画像をアップロードして解析を開始し、結果を確認してください。</p>
+
+                    <h5 class="p-2 bg-primary-subtle rounded-3 font-monospace">GitHubリンク</h5>
+                    <p><a class="font-monospace" href="https://github.com/username/strawscan"
+                            target="_blank">StrawScanのコード</a></p>
+
+                    <h5 class="p-2 bg-primary-subtle rounded-3">製作者</h5>
+                    <div class="font-monospace">
+                        龍谷大学 先端理工学部 数理・情報科学課程<br>
+                        slab 2024卒<br>
+                        松本虎太郎
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成長段階ガイドのモーダル -->
+    <div class="modal fade" id="guideModal" tabindex="-1" aria-labelledby="guideModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="guideModalLabel">成長段階ガイド</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>成長段階は以下の5種類で分類されています。</p>
+                    <div class="row">
+                        <div class="card" style="width: 13rem;">
+                            <img src="../static/images/flowering.png" class="card-img-top" alt="flowering">
+                            <div class="card-body">
+                                <h5 class="card-title font-monospace"><span
+                                        class="badge rounded-pill text-bg-secondary">1</span>flowering</h5>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 13rem;">
+                            <img src="../static/images/growing_g.png" class="card-img-top" alt="growing_g">
+                            <div class="card-body">
+                                <h5 class="card-title font-monospace"><span
+                                        class="badge rounded-pill text-bg-secondary">2</span>growing_g</h5>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 13rem;">
+                            <img src="../static/images/growing_w.png" class="card-img-top" alt="growing_w">
+                            <div class="card-body">
+                                <h5 class="card-title font-monospace"><span
+                                        class="badge rounded-pill text-bg-secondary">3</span>growing_w</h5>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 13rem;">
+                            <img src="../static/images/neary_m.png" class="card-img-top" alt="nearly_m">
+                            <div class="card-body">
+                                <h5 class="card-title font-monospace"><span
+                                        class="badge rounded-pill text-bg-secondary">4</span>nearly_m</h5>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 13rem;">
+                            <img src="../static/images/mature.png" class="card-img-top" alt="mature">
+                            <div class="card-body">
+                                <h5 class="card-title font-monospace"><span
+                                        class="badge rounded-pill text-bg-secondary">5</span>mature</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

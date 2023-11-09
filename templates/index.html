@@ -10,6 +10,7 @@
 
     <div class="container text-center">
 
+        <!-- アップロードの案内文 -->
         <div class="row justify-content-center">
             <div class="col-10 col-md-12 mt-5 mb-4 mb-md-5">
                 <p class="fs-1-responsive text-center" id="upload-prompt">
@@ -19,9 +20,11 @@
             </div>
         </div>
 
+        <!-- アップロードエリア -->
         <div class="row justify-content-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <label id="upload-box" class="d-flex justify-content-center align-items-center hover-grow" for="upload-image">
+                <label id="upload-box" class="d-flex justify-content-center align-items-center hover-grow"
+                    for="upload-image">
                     <input type="file" name="file" id="upload-image" accept="image/*" onchange="displayImage(this)">
                     <p id="upload-text">ファイルを選択<br>or<br>ドラッグ＆ドロップ</p>
                     <img id="uploaded-image" src="" alt="Uploaded Image">
@@ -29,16 +32,25 @@
             </div>
         </div>
 
+        <!-- ボタンエリア -->
         <div class="row justify-content-center">
             <div class="col-md-6 mt-5">
                 <button type="button" class="mx-lg-5 mx-md-4 mx-2 btn btn-secondary hover-grow" id="cancel-button"
                     onclick="reloadPage()">キャンセル</button>
-                <button type="submit" class="mx-lg-5 mx-md-4 mx-2 btn btn-warning hover-grow" id="analyze-button">解析開始</button>
+                <button type="submit" class="mx-lg-5 mx-md-4 mx-2 btn btn-warning hover-grow"
+                    id="analyze-button">解析開始</button>
             </div>
         </div>
 
     </div>
 
 </form>
+
+<!-- ローディングオーバーレイとスピナー -->
+<div id="loading-overlay" style="display: none;">
+    <div class="spinner-border text-light" role="status" id="loading-spinner">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 {% endblock %}

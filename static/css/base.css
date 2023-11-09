@@ -1,16 +1,23 @@
 /* フォントの設定 */
 @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
 * {
-    font-family: 'Kosugi Maru', sans-serif;
+  font-family: 'Kosugi Maru', sans-serif;
 }
 
 /* 選択時拡大する（index, resultと共有クラス） */
 @media (min-width: 768px) {
-    .hover-grow {
-      transition: transform 0.3s ease;
-    }
-
-    .hover-grow:hover {
-      transform: scale(1.05);
-    }
+  .hover-grow {
+    transition: transform 0.3s ease;
   }
+
+  .hover-grow:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* モーダルウィンドウ内のセクション終わりに空行を追加 */
+.modal-body p,
+.modal-body ul {
+  margin-bottom: 1rem;
+}

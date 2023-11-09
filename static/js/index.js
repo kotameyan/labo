@@ -3,7 +3,7 @@ function displayImage(input) {
     const file = input.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             // テキストを非表示にし、画像を表示する
             document.getElementById('upload-text').style.display = 'none';
             const imgElement = document.getElementById('uploaded-image');
@@ -20,5 +20,10 @@ function displayImage(input) {
 
 // キャンセルを押したときに画面をリロードする
 function reloadPage() {
-    location.reload();
+    window.location.reload(true);
 }
+
+// ローディングスピナーを起動する
+document.getElementById('upload-form').addEventListener('submit', function () {
+    document.getElementById('loading-overlay').style.display = 'flex'; // オーバーレイを表示
+});

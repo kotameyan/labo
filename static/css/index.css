@@ -9,6 +9,7 @@
 .fs-1-responsive {
     font-size: 2.5rem;
 }
+
 .img-lg {
     width: 40px;
     height: auto;
@@ -18,6 +19,7 @@
     .fs-1-responsive {
         font-size: 1.75rem;
     }
+
     .img-lg {
         width: 30px;
     }
@@ -27,6 +29,7 @@
     .fs-1-responsive {
         font-size: 1.25rem;
     }
+
     .img-lg {
         width: 20px;
     }
@@ -55,4 +58,31 @@
 
     max-width: 95%;
     max-height: 95%;
+}
+
+
+
+/* ローディング画面のデザイン */
+#loading-overlay {
+    position: fixed;
+    /* 画面全体を覆う */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 透明度を持たせた黒で画面を暗くする */
+    display: flex;
+    justify-content: center;
+    /* 横方向の中央揃え */
+    align-items: center;
+    /* 縦方向の中央揃え */
+    z-index: 1000;
+    /* 他の要素よりも前面に */
+}
+
+.spinner-border {
+    width: 3rem;
+    /* スピナーのサイズを調整 */
+    height: 3rem;
 }
