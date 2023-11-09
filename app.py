@@ -136,6 +136,7 @@ def create_classes_graph():
     sns.barplot(x='成長段階', y='検出個数', data=df, palette=colors, edgecolor=edge_colors)
 
     # グラフを画像として保存
+    plt.tight_layout()
     plt.savefig(f'static/predict/classes/graph/result_classes_{target_filename}.png')
 
     # グラフを閉じる
@@ -169,6 +170,7 @@ def create_harvests_graph():
     plt.grid(True, linestyle='--', alpha=0.6)
 
     # グラフを画像として保存
+    plt.tight_layout()
     plt.savefig(f'static/predict/harvests/graph/result_harvests_{target_filename}.png')
 
     # グラフを閉じる
@@ -193,9 +195,6 @@ def result():
     result_classes = url_for('static', filename=f'predict/classes/graph/result_classes_{target_filename}.png')
 
     # htmlに渡すデータ(harvests)を用意
-    # result_harvests_path = os.path.join(app.root_path, 'static/predict/harvests/json', f'result_harvests_{target_filename}.json') # harvestsのパスを指定
-    # with open(result_harvests_path, 'r') as file:
-    #     result_harvests = json.load(file) # JSONファイルの読み込み
     result_harvests = url_for('static', filename=f'predict/harvests/graph/result_harvests_{target_filename}.png')
 
     return render_template('result.html', result_images=result_images, result_classes=result_classes, result_harvests=result_harvests)

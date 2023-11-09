@@ -23,7 +23,7 @@
     {% block head %}{% endblock %}
 
     <!-- ファビコン -->
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary border">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="javascript:void(0);" onclick="resetToHome()">
                     <img src="../static/images/strawscan-logo-only.svg" alt="app-logo" height="40">
                     <img src="../static/images/strawscan-string-only.svg" alt="app-name" height="28">
                 </a>

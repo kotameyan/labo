@@ -1,25 +1,64 @@
 {% extends "base.html" %}
 
-{% set css_file = 'css/result.css' %}
-{% set js_file = 'js/result.js' %}
+{% block head %}
+<link rel="stylesheet" href="../static/css/result.css">
+<script defer src="../static/js/result.js"></script>
+{% endblock %}
 
 {% block content %}
-    <h1>いちごの実の<br>成長段階解析結果</h1>
+<div class="container text-center">
 
-    <div class="input-section">
-        <label class="upload-label">
-            <img id="result_images" src="{{ result_images }}" alt="解析結果の画像">
-        </label>
+    <div class="row">
+        <div class="col">
+            <p class="fs-1-responsive text-center my-3 my-md-5" id="result-prompt">解析結果</p>
+        </div>
     </div>
 
-    <div class="info">
-        <h2>成長段階ごとの集計</h2>
-        <img id="result_classes" src="{{ result_classes }}" alt="成長段階のグラフ">
-        <h2>今後の成熟時期スケジュール</h2>
-        <img id="result_harvests" src="{{ result_harvests }}" alt="収穫時期のグラフ">
+    <div class="row">
+
+        <div class="col-md-4 col-sm-12 mb-3">
+            <div class="card hover-grow">
+                <div class="card-body">
+                    <div class="card-title">イチゴの成長検出結果</div>
+                    <div class="card-text text-body-secondary">
+                        ご提供いただいたイチゴの画像内で、AIが識別した成長段階ごとのイチゴがバウンディングボックスで示されています。各ボックスの色とラベルが成長の状態を表し、数値はその信頼度を意味しています。
+                    </div>
+                </div>
+                <img class="img-fluid mb-3 mx-auto d-block" id="result_images" src="{{ result_images }}" alt="解析結果の画像">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mb-3">
+            <div class="card hover-grow">
+                <div class="card-body">
+                    <div class="card-title">成長段階別検出数分布</div>
+                    <div class="card-text text-body-secondary">
+                        アップロードされた画像内で検出されたイチゴの各成長段階を数値化しています。棒の高さがその段階にあるイチゴの個数を表しており、一目でどの成長段階が最も豊富なのか、または不足しているのかを把握できます。
+                    </div>
+                </div>
+                <img class="img-fluid mb-3 mx-auto d-block" id="result_classes" src="{{ result_classes }}" alt="成長段階のグラフ">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mb-3">
+            <div class="card hover-grow">
+                <div class="card-body">
+                    <div class="card-title">収穫時期予測トレンド</div>
+                    <div class="card-text text-body-secondary">
+                        収穫に最適なタイミングを予測するためのトレンドグラフをこちらでご確認いただけます。この折れ線グラフは、現在の成長データと専門家によるアドバイスを元に、今後のイチゴの収穫量の変動を予測しています。
+                    </div>
+                </div>
+                <img class="img-fluid mb-3 mx-auto d-block" id="result_harvests" src="{{ result_harvests }}" alt="収穫時期のグラフ">
+            </div>
+        </div>
+
     </div>
 
-    <div class="button-section">
-        <button onclick="window.location.href='/'">最初に戻る</button>
+    <div class="row">
+        <div class="col">
+            <a href="/" class="btn btn-secondary mt-3 mb-5 hover-grow">最初に戻る</a>
+        </div>
     </div>
+</div>
+
 {% endblock %}

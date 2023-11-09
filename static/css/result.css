@@ -1,5 +1,43 @@
-/* フォントの設定 */
-@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
-* {
-    font-family: 'Kosugi Maru', sans-serif;
+/* 「イチゴの実の解析結果」の案内文の制御 */
+.fs-1-responsive {
+    font-size: 2.5rem;
+}
+
+@media (max-width: 1280px) {
+    .fs-1-responsive {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .fs-1-responsive {
+        font-size: 1.25rem;
+    }
+}
+
+
+
+/* カードクラスの大きさを制御 */
+.card {
+    height: 60vh;
+}
+
+.card img {
+    max-height: 55%;
+    width: 95%;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }
+
+    .card img {
+        max-height: none;
+        height: auto;
+    }
 }

@@ -3,3 +3,14 @@
 * {
     font-family: 'Kosugi Maru', sans-serif;
 }
+
+/* 選択時拡大する（index, resultと共有クラス） */
+@media (min-width: 768px) {
+    .hover-grow {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-grow:hover {
+      transform: scale(1.05);
+    }
+  }
