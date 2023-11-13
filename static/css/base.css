@@ -21,3 +21,17 @@
 .modal-body ul {
   margin-bottom: 1rem;
 }
+
+/* 成長段階ガイドの案内文の制御 */
+@media (max-width: 768px) {
+  #guide-statement .part-1::after {
+    content: "\A";
+    white-space: pre;
+  }
+}
+
+/* 成長段階ガイドの画像サイズ */
+.guide-img-size {
+  max-width: 60%;
+  max-height: auto;
+}

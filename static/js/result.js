@@ -1,10 +1,10 @@
 // 画像の拡大表示
-document.querySelectorAll('.card-expandable').forEach(function (card) {
-    card.addEventListener('click', function () {
-        // カード内のimg要素のsrc属性を取得
-        var imgSrc = card.querySelector('img').src;
-        // カードのタイトルテキストを取得（バッジを除外）
-        var cardTitle = card.querySelector('.title-text').textContent;
+document.querySelectorAll('.expandable-image').forEach(function (img) {
+    img.addEventListener('click', function () {
+        // img要素のsrc属性を取得
+        var imgSrc = img.src;
+        // img要素が属するカードまたはアコーディオンアイテムのタイトルテキストを取得
+        var cardTitle = img.closest('.card, .accordion-item').querySelector('.title-text').textContent;
         // モーダル内のimg要素のsrcをカードの画像のsrcに設定
         document.getElementById('modalImage').src = imgSrc;
         // モーダルのタイトルを設定

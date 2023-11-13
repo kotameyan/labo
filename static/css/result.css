@@ -1,25 +1,6 @@
-/* 「イチゴの実の解析結果」の案内文の制御 */
-.fs-1-responsive {
-    font-size: 2.5rem;
-}
-
-@media (max-width: 1280px) {
-    .fs-1-responsive {
-        font-size: 1.75rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .fs-1-responsive {
-        font-size: 1.25rem;
-    }
-}
-
-
-
 /* カードクラスの大きさを制御 */
 .card {
-    height: 60vh;
+    height: 55vh;
 }
 
 .card img {
@@ -39,5 +20,24 @@
     .card img {
         max-height: none;
         height: auto;
+    }
+}
+
+/* 画面幅によってカードとアコーディオンを切り替え */
+#card-row {
+    display: flex;
+}
+
+#accordion-row {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #card-row {
+        display: none;
+    }
+
+    #accordion-row {
+        display: flex;
     }
 }
