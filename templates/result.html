@@ -19,11 +19,11 @@
         <div class="col-md-4 col-sm-12 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title mb-5">
+                    <h5 class="card-title mb-4">
                         <div class="title-text">イチゴの成長検出結果</div>
                     </h5>
-                    <img class="img-fluid mb-3 mx-auto d-block expandable-image hover-grow" id="result_images"
-                        src="{{ result_images }}" alt="解析結果の画像">
+                    <img class="img-fluid img-thumbnail mb-3 mx-auto d-block expandable-image hover-grow"
+                        id="result_images" src="{{ result_images }}" alt="解析結果の画像">
                     <p class="card-text text-body-secondary">
                         ご提供いただいたイチゴの画像内で、AIが識別した成長段階ごとのイチゴがバウンディングボックスで示されています。各ボックスの色とラベルが成長の状態を表し、数値はその信頼度を意味しています。
                     </p>
@@ -46,10 +46,10 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-12 mb-3">
+        <div class="col-md-4 col-sm-12 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title mb-5">
+                    <h5 class="card-title mb-4">
                         <div class="title-text">収穫時期予測トレンド</div>
                     </h5>
                     <img class="img-fluid mb-3 mx-auto d-block expandable-image hover-grow" id="result_harvests"
@@ -76,8 +76,8 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <img class="img-fluid mb-3 mx-auto d-block expandable-image hover-grow" id="result_images_ac"
-                            src="{{ result_images }}" alt="解析結果の画像">
+                        <img class="img-fluid img-thumbnail mb-3 mx-auto d-block expandable-image hover-grow"
+                            id="result_images_ac" src="{{ result_images }}" alt="解析結果の画像">
                         <p class="text-body-secondary">
                             ご提供いただいたイチゴの画像内で、AIが識別した成長段階ごとのイチゴがバウンディングボックスで示されています。各ボックスの色とラベルが成長の状態を表し、数値はその信頼度を意味しています。
                         </p>

@@ -3,11 +3,10 @@
     height: 55vh;
 }
 
-.card img {
-    max-height: 55%;
-    width: 95%;
-    object-fit: contain;
+.expandable-image {
+    max-height: 280px;
 }
+
 
 @media (max-width: 768px) {
     .card {
