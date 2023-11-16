@@ -10,8 +10,8 @@
     font-size: 2.5rem;
 }
 
-.img-lg {
-    width: 40px;
+.bi-caret-down {
+    font-size: 40px;
     height: auto;
 }
 
@@ -20,8 +20,8 @@
         font-size: 1.75rem;
     }
 
-    .img-lg {
-        width: 30px;
+    .bi-caret-down {
+        font-size: 30px;
     }
 }
 
@@ -30,8 +30,8 @@
         font-size: 1.25rem;
     }
 
-    .img-lg {
-        width: 20px;
+    .bi-caret-down {
+        font-size: 20px;
     }
 }
 

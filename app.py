@@ -188,14 +188,24 @@ def index():
 # 解析結果の表示画面
 @app.route('/result')
 def result():
-    # htmlに渡すデータ（images）を用意
+    # htmlに渡す画像データ（images）を用意
     result_images = url_for('static', filename=f'predict/images/result_images_{target_filename}.png')
 
-    # htmlに渡すデータ(classes)を用意
-    result_classes = url_for('static', filename=f'predict/classes/graph/result_classes_{target_filename}.png')
+    # htmlに渡すグラフデータ(classes)を用意
+    # result_classes = url_for('static', filename=f'predict/classes/graph/result_classes_{target_filename}.png')
 
-    # htmlに渡すデータ(harvests)を用意
-    result_harvests = url_for('static', filename=f'predict/harvests/graph/result_harvests_{target_filename}.png')
+    # htmlに渡すJSONデータ(classes)を用意
+    file_path = f'static/predict/classes/json/result_classes_{target_filename}.json' # JSONファイルのパスを指定
+    with open(file_path, 'r') as file:
+        result_classes = json.load(file)  # ファイルの内容を読み込む
+
+    # htmlに渡すグラフデータ(harvests)を用意
+    # result_harvests = url_for('static', filename=f'predict/harvests/graph/result_harvests_{target_filename}.png')
+
+    # htmlに渡すJSONデータ(harvests)を用意
+    file_path = f'static/predict/harvests/json/result_harvests_{target_filename}.json' # JSONファイルのパスを指定
+    with open(file_path, 'r') as file:
+        result_harvests = json.load(file)  # ファイルの内容を読み込む
 
     return render_template('result.html', result_images=result_images, result_classes=result_classes, result_harvests=result_harvests)
 

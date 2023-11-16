@@ -1,6 +1,6 @@
 /* カードクラスの大きさを制御 */
 .card {
-    height: 55vh;
+    height: 65vh;
 }
 
 .expandable-image {
@@ -31,7 +31,7 @@
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
     #card-row {
         display: none;
     }
@@ -39,4 +39,9 @@
     #accordion-row {
         display: flex;
     }
+}
+
+/* 拡大表示した時も背景が適用されるように調整 */
+.bg-body-tertiary {
+    background-color: #f8f9fa;
 }
