@@ -45,3 +45,11 @@
 .bg-body-tertiary {
     background-color: #f8f9fa;
 }
+
+/* モーダルウィンドウの画像を大きく表示 */
+#modalImage {
+    width: 100%;
+    /* モーダルの幅に合わせる */
+    height: auto;
+    /* アスペクト比を維持する */
+}
