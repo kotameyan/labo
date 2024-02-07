@@ -1,0 +1,11 @@
+# data path
+train: ./train
+val: ./valid
+
+# class names
+names:
+  0: flowering
+  1: growing_g
+  2: growing_w
+  3: nearly_m
+  4: mature
